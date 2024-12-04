@@ -38,8 +38,10 @@ public final class LambdaFilter extends JFrame {
         /**
          * Commands.
          */
-        IDENTITY("No modifications", Function.identity());
-
+        IDENTITY("No modifications", Function.identity()),
+        TO_LOWER("Lowercase", String::toLowerCase),
+        COUNT("count chars", s -> Integer.toString(s.length())),
+        LINES("count line", s -> Long.toString(s.chars().filter(e -> e == '\n').count() + 1));
         private final String commandName;
         private final Function<String, String> fun;
 
@@ -47,6 +49,7 @@ public final class LambdaFilter extends JFrame {
             commandName = name;
             fun = process;
         }
+        
 
         @Override
         public String toString() {
